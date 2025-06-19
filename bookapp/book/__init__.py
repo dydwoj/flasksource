@@ -20,9 +20,9 @@ def create_app():
     from . import models
 
     # 블루프린트 등록
-    from .views import main_views, todo_views
+    from .views import main_views, book_views
 
     app.register_blueprint(main_views.bp)
-    app.register_blueprint(todo_views.bp)
+    app.register_blueprint(book_views.bp)
 
     return app

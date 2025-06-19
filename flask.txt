@@ -1,4 +1,5 @@
 << flask >>
+    기본적인 구조 파악 : flasksource/todo 필수 확인
 
     < 파이썬으로 새로운 프로젝트 생성하기 >
 
@@ -28,6 +29,8 @@
 
         3) pip install flask-migrate
             => DB 연동을 위한 라이브러리
+
+        4) pip install flask-wtf
 
     < 설치한 extension >
         
@@ -77,6 +80,21 @@
         참고 : __init__.py, main_views.py
         => 라우팅 함수의 체계적인 관리
 
+        * url_prefix -> 기본인 http://127.0.0.1:5000 이후에 뭘 붙일건지의 얘기임
+
+        * redirect : 우리가 아는 리다이랙트
+            => 경로를 옮겨줄 때는 url_for(") 를 이용해서 이동시키면 됨
+        
+        < 메서드 >
+
+            * url_for('todo.detail', id=todo.id)
+                => 여기서의 todo 는 별칭을 의미하고, 뒤에 detail 은 함수명을 의미함
+
+            1) url_prefix -> 기본인 http://127.0.0.1:5000 이후에 뭘 붙일건지의 얘기임
+            2) redirect : 우리가 아는 리다이랙트
+                => 경로를 옮겨줄 때는 url_for(") 를 이용해서 이동시키면 됨
+            3) get_or_404()
+
     < DB 연동 >
         참고 : models.py (엔티티)
         ORM (Object Relation Mapping) 형식으로 연동
@@ -108,3 +126,9 @@
                     2. flask db migrate
                     3. flask db upgrade
             
+            * 서버 구동 : flask --app todo run --debug
+            
+            - CRUD
+                참고 : todo.ipynb
+
+                * crud 는 자바의 crud 보다 간단하나, 동작의 방식이 비슷함

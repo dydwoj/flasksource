@@ -1,0 +1,22 @@
+{% extends "base.html" %} {% block content %}
+<div class="row mb3">
+  <h1>Todo 추가</h1>
+</div>
+<form method="post">
+  {% include "errors.html" %} {{form.csrf_token}}
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" aria-describedby="title" name="title" />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea name="description" id="description" rows="10" class="form-control" name="description"></textarea>
+  </div>
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="important" name="important" />
+    <label class="form-check-label" for="important">Important</label>
+  </div>
+  <button type="submit" class="btn btn-success">추가</button>
+  <a href="{{ url_for('todo.list') }}" class="btn btn-primary">목록</a>
+</form>
+{% endblock %}

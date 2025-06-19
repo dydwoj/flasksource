@@ -1,0 +1,38 @@
+{% extends "base.html" %} {% block content %}
+<div class="row mb3">
+  <h1>Todo 목록</h1>
+</div>
+<div class="row mb-3">
+  <div class="col">
+    <a href="{{ url_for('todo.register') }}">Todo 추가</a>
+  </div>
+  <div class="col text-end">
+    <a href="{{ url_for('todo.list') }}" class="btn btn-primary">모든 Todo</a>
+    <a href="{{ url_for('todo.undone_list') }}" class="btn btn-danger">미완료 Todo</a>
+    <a href="{{ url_for('todo.done_list') }}" class="btn btn-success">완료 Todo</a>
+  </div>
+</div>
+<table class="table">
+  <tbody>
+    {% for todo in todos %}
+    <tr>
+      <th scope="row">
+        <a href="{{ url_for('todo.detail', id=todo.id) }}">{{ todo.title }}</a>
+        {% if todo.important %}
+        <span class="badge bg-danger">!</span>
+        {% endif %}
+      </th>
+      <td>
+        {% if todo.completed == 1 %}
+        <a href="{{ url_for('todo.undone', id=todo.id) }}" class="btn btn-danger btn-sm">완료</a>
+        {% else %}
+        <a href="{{ url_for('todo.done', id=todo.id) }}" class="btn btn-danger btn-sm">미완료</a>
+        {% endif %}
+
+        <a href="{{ url_for('todo.edit', id=todo.id) }}" class="btn btn-primary btn-sm">수정</a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

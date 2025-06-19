@@ -1,0 +1,60 @@
+{% extends "base.html" %} {% block content %}
+<div class="row mb3">
+  <h1>Todo 상세</h1>
+</div>
+<form>
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input
+      type="text"
+      class="form-control"
+      id="title"
+      aria-describedby="title"
+      name="title"
+      value="{{todo.title}}"
+      readonly
+    />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea name="description" id="description" rows="10" class="form-control" readonly>
+{{todo.description}}</textarea
+    >
+  </div>
+  <div class="mb-3 form-check">
+    <input
+      type="checkbox"
+      class="form-check-input"
+      id="completed"
+      name="completed"
+      {%
+      if
+      todo.completed
+      %}
+      checked
+      {%
+      endif
+      %}
+    />
+    <label class="form-check-label" for="completed">Completed</label>
+  </div>
+  <div class="mb-3 form-check">
+    <input
+      type="checkbox"
+      class="form-check-input"
+      id="important"
+      name="important"
+      {%
+      if
+      todo.important
+      %}
+      checked
+      {%
+      endif
+      %}
+    />
+    <label class="form-check-label" for="important">Important</label>
+  </div>
+  <a href="{{ url_for('todo.list') }}" class="btn btn-primary">목록</a>
+</form>
+{% endblock %}
