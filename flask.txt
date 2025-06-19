@@ -1,0 +1,110 @@
+<< flask >>
+
+    < 파이썬으로 새로운 프로젝트 생성하기 >
+
+        1) 원하는 폴더로 경로 변경 후
+            c:\source\flasksource>python -m venv venv
+
+        2) Scripts 폴더로 이동
+            c:\source\flasksource>cd venv\Scripts
+
+        3) 가상환경 활성화
+            이동한 Scripts 폴더에서 activate
+
+        4) flask 라이브러리 설치
+            pip install flask
+
+        5) vscode 실행 후 gitignore 설치해야 함
+            - 제외 목록
+                python
+                venv
+    < 설치한 라이브러리 >
+
+        1) pip install flask
+            => 프로젝트 생성을 위한 필수 라이브러리
+
+        2) pip install SQLAlchemy
+            => DB 연동을 위한 라이브러리
+
+        3) pip install flask-migrate
+            => DB 연동을 위한 라이브러리
+
+    < 설치한 extension >
+        
+        1) flask-snippets : cstrap
+
+    < 명령어 모음 >
+
+        1) flask --app todo/hello run
+            => 개발용 서버 열기 (todo/hello 는 파일 위치임 : todo 폴더의 hello.py 실행한 것)
+            => flask --app todo/hello run --debug
+                => debug 는 오류가 나는 코드를 보여달라는 의미
+
+    - flask 란?
+        => 파이썬 웹 애플리케이션 프레임워크 (== spring)
+        => flask 외의 유명한 프레임 워크 : django
+            => django 는 모든 기능을 제공하는 프레임워크임
+                => 관리자페이지, 시큐리티 기능 제공
+        
+    - WSGI (Web Server Gateway Interface) server
+        => 웹서버와 웹애플리케이션(파이썬 애플리케이션)간의 인터페이스를 정희하는 표준
+        => 파이썬을 이해해서 응답해주는 서버
+            => 자바의 톰캣이랑 비슷한 서버임 -> 톰캣도 자바를 이해하는 서버임
+
+    - 매핑
+        1) @app.route("/")
+            =>  == @GetMapping("/") 자바에선 매핑, 파이썬에선 라우트라고 부름
+        
+        request : 사용자 정보 요청
+        Flask : flask 임포트
+        render_template : 템플릿을 보여주려고
+
+    < 프로젝트 구조 >
+
+        =>flask 에서 지정한 프로젝트 구조 자체는 없음
+        => django 가 이러한 구조로 되어있음
+
+        폴더 --- app 폴더 생성(todo)
+                  |
+                  ---- forms.py : DTO 역할
+                  ---- views.py (보통은 여러개 작성) : controller 역할
+                  ---- models.py : Entity 역할
+                  - templates 폴더 : 템플릿파일(html)
+                  - static 폴더 : css, js, img 등 들어감
+        config.py : 환경변수 저장 파일
+
+    < 블루프린트 >
+        참고 : __init__.py, main_views.py
+        => 라우팅 함수의 체계적인 관리
+
+    < DB 연동 >
+        참고 : models.py (엔티티)
+        ORM (Object Relation Mapping) 형식으로 연동
+            => 클래스 == 테이블
+            => java 에서 ORM 구현 : JPA 개념으로 -> 하이버네이트 구현체가 존재
+        
+        - SQLAlchemy 라이브러리
+            => python 의 JPA 같은 개념
+
+            설치 : pip install SQLAlchemy
+
+        - todo 앱이 SQLAlchemy 사용할 준비하기
+
+            - cmd 구문
+                cd tutorial/
+                set FLASK_APP=todo
+                    => 초기화 작업
+                flask db init
+            
+            - db 생성 구문
+                flask db migrate
+
+            - table 생성 구문
+                flask db upgrade
+
+            * migrations/versions 의 ~~~~.py 에는 우리가 어떤 변화를 일으켰는지 확인할 수 있음
+                => 만약 초기화를 해서 다시 작성을 원하면
+                    1. flask db init
+                    2. flask db migrate
+                    3. flask db upgrade
+            
