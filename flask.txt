@@ -19,6 +19,7 @@
             - 제외 목록
                 python
                 venv
+
     < 설치한 라이브러리 >
 
         1) pip install flask
@@ -31,6 +32,8 @@
             => DB 연동을 위한 라이브러리
 
         4) pip install flask-wtf
+
+        5) pip install email_validator
 
     < 설치한 extension >
         
@@ -94,6 +97,9 @@
             2) redirect : 우리가 아는 리다이랙트
                 => 경로를 옮겨줄 때는 url_for(") 를 이용해서 이동시키면 됨
             3) get_or_404()
+        
+        < 페이지 나누기 >
+            참고 : bookapp
 
     < DB 연동 >
         참고 : models.py (엔티티)
@@ -110,7 +116,7 @@
 
             - cmd 구문
                 cd tutorial/
-                set FLASK_APP=todo
+                set FLASK_APP=파일명
                     => 초기화 작업
                 flask db init
             

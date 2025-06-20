@@ -1,0 +1,28 @@
+{% extends "base.html" %} {% block content %}
+<form>
+  <div class="mb-3">
+    <label for="code" class="form-label">Code</label>
+    <input type="text" class="form-control" id="code" name="code" value="{{book.code}}" readonly />
+  </div>
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title" value="{{book.title}}" readonly />
+  </div>
+  <div class="mb-3">
+    <label for="author" class="form-label">Author</label>
+    <input type="text" class="form-control" id="author" name="author" value="{{book.author}}" readonly />
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <input type="text" class="form-control" id="price" name="price" value="{{book.price}}" readonly />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea name="description" id="description" rows="10" class="form-control" readonly>
+{{book.description or ''}}</textarea
+    >
+  </div>
+  <a href="{{ url_for('book.edit', code=book.code) }}" class="btn btn-success">수정</a>
+  <a href="{{ url_for('book.list') }}" class="btn btn-primary">목록</a>
+</form>
+{% endblock %}

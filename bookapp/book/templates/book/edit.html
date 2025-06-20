@@ -1,0 +1,30 @@
+{% extends "base.html" %} {% block content %}
+<form method="post">
+  {% include "errors.html" %} {{form.csrf_token}}
+  <div class="mb-3">
+    <label for="code" class="form-label">Code</label>
+    <input type="text" class="form-control" id="code" name="code" value="{{form.code.data}}" readonly />
+  </div>
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" id="title" name="title" value="{{form.title.data}}" readonly />
+  </div>
+  <div class="mb-3">
+    <label for="author" class="form-label">Author</label>
+    <input type="text" class="form-control" id="author" name="author" value="{{form.author.data}}" readonly />
+  </div>
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <input type="text" class="form-control" id="price" name="price" value="{{form.price.data}}" />
+  </div>
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea name="description" id="description" rows="10" class="form-control">
+{{form.description.data or ''}}</textarea
+    >
+  </div>
+  <button type="submit" class="btn btn-success">수정</button>
+  <a href="{{ url_for('book.remove', code=form.code.data) }}" class="btn btn-danger">삭제</a>
+  <a href="{{ url_for('book.list') }}" class="btn btn-primary">목록</a>
+</form>
+{% endblock %}
