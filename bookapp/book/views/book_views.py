@@ -3,11 +3,13 @@ from book.models import Book
 from book.forms import BookForm
 from book import db
 from datetime import datetime
+from book.views.auth_views import login_required
 
 bp = Blueprint("book", __name__, url_prefix="/book")
 
 
 @bp.route("/create/", methods=["GET", "POST"])
+@login_required  # 라우트 뒤쪽에 위치해야함
 def create():
 
     form = BookForm()
@@ -46,6 +48,7 @@ def detail(code):
 
 
 @bp.route("/edit/<int:code>", methods=["GET", "POST"])
+@login_required  # 라우트 뒤쪽에 위치해야함
 def edit(code):
     book = Book.query.get_or_404(code)
 
@@ -63,6 +66,7 @@ def edit(code):
 
 
 @bp.route("/remove/<int:code>")
+@login_required  # 라우트 뒤쪽에 위치해야함
 def remove(code):
     book = Book.query.get_or_404(code)
     db.session.delete(book)

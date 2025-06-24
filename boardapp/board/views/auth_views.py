@@ -9,9 +9,10 @@ from flask import (
     g,
 )
 from werkzeug.security import check_password_hash, generate_password_hash
-from book.forms import UserForm, UserLoginForm
-from book.models import User
-from book import db
+
+from board.forms import UserForm, UserLoginForm
+from board.models import User
+from board import db
 import functools
 
 bp = Blueprint("auth", __name__, url_prefix="/auth")

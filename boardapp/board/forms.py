@@ -3,14 +3,6 @@ from wtforms import StringField, TextAreaField, IntegerField, PasswordField, Ema
 from wtforms.validators import DataRequired, Email, EqualTo, Length
 
 
-class BookForm(FlaskForm):
-    code = IntegerField("도서코드")
-    title = StringField("도서명", validators=[DataRequired("Title 필수 입력")])
-    author = StringField("작가명", validators=[DataRequired("Author 필수 입력")])
-    price = StringField("가격", validators=[DataRequired("Price 필수 입력")])
-    description = TextAreaField()
-
-
 class UserForm(FlaskForm):
     username = StringField(
         "아이디",

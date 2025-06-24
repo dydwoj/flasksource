@@ -100,6 +100,19 @@
         
         < 페이지 나누기 >
             참고 : bookapp
+    
+    < 시큐리티 >
+        참고 : bookapp/auth
+
+        - auth_views 내용
+            * 로그인시 비밀번호 확인
+                => 로그인시 들어오는 비밀번호를 다시 암호화해서 db 의 암호화된 비밀번호와 확인함
+
+            1) generate_password_hash() : 비밀번호 암호화
+                => passwordEncoder() 와 같은 개념
+
+            2) before_app_request : 라우팅 함수보다 항상 제일 먼저 실행해달라는 의미
+                => 화면단의 화면에 내용물이 출력되는 라우터보다 제일 먼저 실행된다는 것
 
     < DB 연동 >
         참고 : models.py (엔티티)
@@ -126,6 +139,12 @@
             - table 생성 구문
                 flask db upgrade
 
+            - 새로운 db 테이블 생성
+                1. set FLASK_APP=파일명
+                2. flask db init
+                3. flask db migrate
+                4. flask db upgrade
+
             * migrations/versions 의 ~~~~.py 에는 우리가 어떤 변화를 일으켰는지 확인할 수 있음
                 => 만약 초기화를 해서 다시 작성을 원하면
                     1. flask db init
@@ -138,3 +157,6 @@
                 참고 : todo.ipynb
 
                 * crud 는 자바의 crud 보다 간단하나, 동작의 방식이 비슷함
+
+        < 관계 맺기 >
+            참고 : boardapp
