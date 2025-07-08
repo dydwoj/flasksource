@@ -1,30 +1,95 @@
 {% extends "base.html" %} {% block content %}
-<form>
-  <div class="mb-3">
-    <label for="code" class="form-label">Code</label>
-    <input type="text" class="form-control" id="code" name="code" value="{{book.code}}" readonly />
+<!-- question 영역 -->
+<h2 class="border-bottom py-2">{{question.subject}}</h2>
+<div class="card">
+  <div class="card-body">
+    <div class="card-text" style="white-space: pre-line">
+      <!-- 질문내용 -->
+      {{question.content}}
+    </div>
+    <div class="d-flex justify-content-end">
+      {% if question.modify_date %}
+      <div class="badge bg-light text-dark p-2 test-start mx-3">
+        <div class="mb-2">modified at</div>
+        <div>{{ question.modify_date|datetime }}</div>
+      </div>
+      {% endif %}
+
+      <div class="badge bg-light text-dark p-2 test-start mx-3">
+        <div>{{ question.user.username }}</div>
+        <div>{{ question.create_date|datetime }}</div>
+      </div>
+    </div>
+    <div class="my-3">
+      <a href="" class="recommend btn btn-sm btn-outline-secondary"
+        >추천
+        <span class="badge rounded-pill bg-danger"> 0 </span>
+      </a>
+      <a href="{{ url_for('question.modify', qid=question.id) }}" class="btn btn-sm btn-outline-secondary">수정</a>
+      <a href="{{ url_for('question.remove', qid=question.id) }}" class="delete btn btn-sm btn-outline-secondary"
+        >삭제</a
+      >
+    </div>
   </div>
-  <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title" value="{{book.title}}" readonly />
+</div>
+
+<!-- card 종료 -->
+<div class="mt-1">
+  <a href="{{ url_for('question.list') }}" class="btn btn-primary">목록</a>
+</div>
+
+<!-- 답변영역 -->
+<div class="border-bottom my-3 py-2">
+  <!-- 답변개수 -->
+  {{ question.answer_set|length }}개의 답변이 있습니다
+</div>
+
+{% for answer in question.answer_set %}
+<div class="card my-3">
+  <div class="card-body">
+    <div class="card-text" style="white-space: pre-line">
+      <!-- 답변내용 -->
+      {{ answer.content }}
+    </div>
+    <div class="d-flex justify-content-end">
+      {% if answer.modify_date %}
+      <div class="badge bg-light text-dark p-2 test-start mx-3">
+        <div class="mb-2">modified at</div>
+        <div>{{ answer.modify_date }}</div>
+      </div>
+      {% endif %}
+      <div class="badge bg-light text-dark p-2 test-start mx-3">
+        <div>
+          <!-- 작성자 -->
+          {{ answer.user.username }}
+        </div>
+        <div>
+          <!-- 답변작성 날짜 -->
+          {{ answer.create_date|datetime }}
+        </div>
+      </div>
+    </div>
+    <div class="my-3">
+      <a href="" class="recommend btn btn-sm btn-outline-secondary"
+        >추천
+        <span class="badge rounded-pill bg-danger"> 0 </span>
+      </a>
+      <a href="{{ url_for('answer.modify', aid=answer.id) }}" class="btn btn-sm btn-outline-secondary">수정</a>
+      <a href="{{ url_for('answer.remove', aid=answer.id) }}" class="delete btn btn-sm btn-outline-secondary">삭제</a>
+    </div>
   </div>
+</div>
+{% endfor %}
+
+<form class="my-3" action="{{ url_for('answer.create', qid=question.id) }}" method="post">
+  {% include "errors.html" %} {{form.csrf_token}}
   <div class="mb-3">
-    <label for="author" class="form-label">Author</label>
-    <input type="text" class="form-control" id="author" name="author" value="{{book.author}}" readonly />
-  </div>
-  <div class="mb-3">
-    <label for="price" class="form-label">Price</label>
-    <input type="text" class="form-control" id="price" name="price" value="{{book.price}}" readonly />
-  </div>
-  <div class="mb-3">
-    <label for="description" class="form-label">Description</label>
-    <textarea name="description" id="description" rows="10" class="form-control" readonly>
-{{book.description or ''}}</textarea
-    >
+    <textarea name="content" id="content" rows="3" class="form-control"></textarea>
   </div>
   {% if g.user %}
-  <a href="{{ url_for('book.edit', code=book.code) }}" class="btn btn-success">수정</a>
+  <button type="submit" class="btn btn-success">답변등록</button>
   {% endif %}
-  <a href="{{ url_for('book.list') }}" class="btn btn-primary">목록</a>
 </form>
+{% endblock %} {% block script %}
+<script src="{{url_for('static', filename='js/detail.js')}}"></script>
 {% endblock %}

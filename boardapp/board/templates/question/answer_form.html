@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block content %}
+<form method="post">
+  {% include "errors.html" %} {{form.csrf_token}}
+  <div class="mb-3">
+    <label for="content" class="form-label">내용</label>
+    <textarea name="content" id="content" rows="6" class="form-control">{{form.content.data or ''}}</textarea>
+  </div>
+  <button type="submit" class="btn btn-success">답변 작성</button>
+  <a href="{{ url_for('question.list') }}" class="btn btn-primary">목록</a>
+</form>
+{% endblock %}

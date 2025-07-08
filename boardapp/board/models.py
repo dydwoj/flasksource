@@ -11,7 +11,7 @@ class Question(db.Model):
     )
     user = db.relationship("User", backref=db.backref("question_set"))
     # manytoone / onetomany 같은 양방향을 열어주기 위한 코드
-    modify_date = db.Column(db.DateTime(), nullable=False)
+    modify_date = db.Column(db.DateTime(), nullable=True)
 
 
 class Answer(db.Model):
@@ -25,8 +25,10 @@ class Answer(db.Model):
     user_id = db.Column(
         db.Integer, db.ForeignKey("user.id", ondelete="CASCADE"), nullable=False
     )
-    user = db.relationship("User", backref=db.backref("answer_set"))
-    modify_date = db.Column(db.DateTime(), nullable=False)
+    user = db.relationship(
+        "User", backref=db.backref("answer_set")
+    )  # 다대일의 관계에선 다 쪽에서 1에 접근 코드만 넣지만 반대로 1쪽에서 다에 접근하는 방식을 위해서 answer_set 사용함
+    modify_date = db.Column(db.DateTime(), nullable=True)
 
 
 # 사용자

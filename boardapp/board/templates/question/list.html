@@ -1,34 +1,64 @@
 {% extends "base.html" %} {% block content %}
+<div class="row my-3">
+  <div class="col-6">
+    <a href="{{ url_for('question.create') }}" class="btn btn-primary">질문 등록</a>
+  </div>
+  <div class="col-6">
+    <div class="input-group">
+      <input type="text" name="" id="" class="form-control" />
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary">찾기</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <table class="table">
   <thead>
     <tr>
-      <th scope="col">Code</th>
-      <th scope="col">Title</th>
-      <th scope="col">Author</th>
-      <th scope="col">Price</th>
+      <th scope="col">번호</th>
+      <th scope="col">제목</th>
+      <th scope="col">작성자</th>
+      <th scope="col">작성일시</th>
     </tr>
   </thead>
   <tbody>
+    {% for question in question_list %}
     <tr>
-      <th scope="row"></th>
-      <td><a href=""></a></td>
-      <td></td>
-      <td></td>
+      <!-- 게시물 번호 : 전체 게시물 개수 - (현재페이지 -1) * 페이지당 게시물수 - 나열인덱스 -->
+      <th scope="row">{{ question_list.total - ((question_list.page - 1) * question_list.per_page) - loop.index0 }}</th>
+      <td>
+        <a href="{{ url_for('question.detail', qid=question.id) }}">{{ question.subject }}</a>
+        {% if question.answer_set|length > 0 %}
+        <span class="text-danger small mx-2">({{ question.answer_set|length }})</span>
+        {% endif %}
+      </td>
+      <td>{{ question.user.username }}</td>
+      <td>{{ question.create_date|datetime }}</td>
     </tr>
+    {% endfor %}
   </tbody>
 </table>
 
 <nav>
   <ul class="pagination justify-content-center">
-    <li class="page-item"><a href="" class="page-link">Previous</a></li>
-
-    <li class="page-item active">
-      <a class="page-link" href="" aria-current="page"></a>
+    {% if question_list.has_prev %}
+    <li class="page-item"><a href="?page={{question_list.prev_num}}" class="page-link">Previous</a></li>
+    {% endif %} {% for page_num in question_list.iter_pages() %} {% if page_num %}
+    <li class="page-item {% if page_num == question_list.page %} active {% endif %}">
+      <a class="page-link" href="?page={{page_num}}" aria-current="page">{{page_num}}</a>
     </li>
-
+    {% else %}
     <li class="disabled"><a class="page-link" href="javascript:void(0)">...</a></li>
-
-    <li class="page-item"><a class="page-link" href="">Next</a></li>
+    {% endif %} {% endfor %} {% if question_list.has_next %}
+    <li class="page-item"><a class="page-link" href="?page={{question_list.next_num}}">Next</a></li>
+    {% endif %}
   </ul>
 </nav>
+
+<form action="" method="post">
+  <input type="hidden" name="kw" />
+  <input type="hidden" name="page" />
+</form>
+
 {% endblock %}
