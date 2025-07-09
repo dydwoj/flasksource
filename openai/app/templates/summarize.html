@@ -1,0 +1,23 @@
+{% extends "base.html" %} {% block content %}
+<h3>요약 프로그램</h3>
+<hr class="border-1" />
+<form action="" method="post" class="mt-3">
+  <div class="mb-3">
+    <label for="">요약 문장 입력</label>
+    <textarea name="text" id="" rows="10" class="form-control" value="{{text or ''}}"></textarea>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">요약</button>
+  </div>
+</form>
+<!-- 요약 결과 보여주기 -->
+{% if summarize_result %}
+<div class="card mt-4 shadow">
+  <div class="card-header bg-primary text-white">🚨 요약</div>
+  <ul class="list-group list-group-flush">
+    {% for element in summarize_result.split("\n") %}
+    <li class="list-group-item">{{ element.strip() }}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %} {% endblock %}

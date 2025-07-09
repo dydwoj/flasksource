@@ -41,10 +41,12 @@
 
     < 명령어 모음 >
 
-        1) flask --app todo/hello run
-            => 개발용 서버 열기 (todo/hello 는 파일 위치임 : todo 폴더의 hello.py 실행한 것)
-            => flask --app todo/hello run --debug
-                => debug 는 오류가 나는 코드를 보여달라는 의미
+        - 서버 열기
+            1) flask --app todo/hello run
+                => 개발용 서버 열기 (todo/hello 는 파일 위치임 : todo 폴더의 hello.py 실행한 것)
+                => flask --app 폴더명 run --debug
+                    => debug 는 오류가 나는 코드를 보여달라는 의미
+                    flask --app app run --debug
 
     - flask 란?
         => 파이썬 웹 애플리케이션 프레임워크 (== spring)

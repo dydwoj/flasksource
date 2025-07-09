@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %}
+<h3>번역 프로그램</h3>
+<hr class="border-1" />
+<form action="" method="post" class="mt-3">
+  <div class="mb-3">
+    <label for="">번역 문장 입력</label>
+    <textarea name="text" id="" rows="5" class="form-control">{{text or ''}}</textarea>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">번역</button>
+  </div>
+</form>
+
+<!-- 번역 결과 보여주기 -->
+<div class="mb-3">
+  <label for="">ChatGPT 번역 결과</label>
+  <textarea name="openai" id="" rows="5" class="form-control">{{openai or ''}}</textarea>
+</div>
+<div class="mb-3">
+  <label for="">DeepL 번역 결과</label>
+  <textarea name="deepl" id="" rows="5" class="form-control">{{deepl or ''}}</textarea>
+</div>
+<div class="mb-3">
+  <label for="">Google 번역 결과</label>
+  <textarea name="google" id="" rows="5" class="form-control">{{google or ''}}</textarea>
+</div>
+{% endblock %}
