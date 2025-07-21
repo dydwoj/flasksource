@@ -7,8 +7,9 @@ def create_app():
     app.config["WTF_CSRF_ENABLED"] = False
 
     # 블루프린트 등록
-    from . import main_views
+    from . import main_views, kakao_views
 
     app.register_blueprint(main_views.bp)
+    app.register_blueprint(kakao_views.bp)
 
     return app

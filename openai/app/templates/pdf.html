@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block content %}
+<h3>PDF 기반 답변 프로그램</h3>
+<hr class="border-1" />
+<form action="" method="post" class="row mt-3" enctype="multipart/form-data">
+  <div class="col-md-12 mb-3">
+    <label for="">PDF 업로드</label>
+    <input type="file" class="form-control" name="file" accept=".pdf" />
+  </div>
+  <div class="col-md-12 mb-3">
+    <label for="">질문</label>
+    <input type="text" class="form-control" value="{{question}}" name="question" />
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">업로드 및 질문</button>
+  </div>
+</form>
+<!-- 답변 보여주기 -->
+{% if result %}
+<div class="card mt-4 shadow">
+  <div class="card-header bg-primary text-white">🚨 답변</div>
+  <ul class="list-group list-group-flush">
+    {% for element in result.split("\n") %}
+    <li class="list-group-item">{{element.strip()}}</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %} {% endblock %}

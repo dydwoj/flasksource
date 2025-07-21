@@ -4,45 +4,45 @@
 <form action="" method="post" class="row mt-3">
   <div class="col-md-6 mb-3">
     <label for="">제품명</label>
-    <textarea type="text" class="form-control" value="{{form.name.data or ''}}" name="name"></textarea>
+    <input type="text" class="form-control" value="{{form.name.data or ''}}" name="name" />
   </div>
   <div class="col-md-6 mb-3">
     <label for="">브랜드명</label>
-    <textarea type="text" class="form-control" value="{{form.brand.data or ''}}" name="brand"></textarea>
+    <input type="text" class="form-control" value="{{form.brand.data or ''}}" name="brand" />
   </div>
   <div class="col-md-6 mb-3">
     <label for="">제품특징</label>
-    <textarea type="text" class="form-control" value="{{form.strength.data or ''}}" name="strength"></textarea>
+    <input type="text" class="form-control" value="{{form.strenghth.data or ''}}" name="strenghth" />
   </div>
   <div class="col-md-6 mb-3">
     <label for="">톤앤매너</label>
-    <textarea
+    <input
       type="text"
       class="form-control"
       value="{{form.tone.data or ''}}"
       name="tone"
-      placeholder="발할하게, 유머러스하게, 감성적으로"
-    ></textarea>
+      placeholder="발랄하게, 유머러스하게, 감성적으로..."
+    />
   </div>
   <div class="col-md-6 mb-3">
     <label for="">필수포함키워드</label>
-    <textarea type="text" class="form-control" value="{{form.keyword.data or ''}}" name="keyword"></textarea>
+    <input type="text" class="form-control" value="{{form.keyword.data or ''}}" name="keyword" />
   </div>
   <div class="col-md-6 mb-3">
     <label for="">브랜드핵심가치</label>
-    <textarea type="text" class="form-control" value="{{form.value.data or ''}}" name="value"></textarea>
+    <input type="text" class="form-control" value="{{form.value.data or ''}}" name="value" />
   </div>
   <div>
     <button type="submit" class="btn btn-primary">광고 문구 생성</button>
   </div>
 </form>
-<!-- 광고 문구 보여주기 -->
+<!-- 광고문구 보여주기 -->
 {% if ad_result %}
 <div class="card mt-4 shadow">
-  <div class="card-header bg-primary text-white">🚨 광고 문구</div>
+  <div class="card-header bg-primary text-white">🚨 광고문구</div>
   <ul class="list-group list-group-flush">
     {% for element in ad_result.split("\n") %}
-    <li class="list-group-item">{{ element.strip() }}</li>
+    <li class="list-group-item">{{element.strip()}}</li>
     {% endfor %}
   </ul>
 </div>

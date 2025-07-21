@@ -11,12 +11,12 @@
   </div>
 </form>
 <!-- 요약 결과 보여주기 -->
-{% if summarize_result %}
+{% if summerize_result %}
 <div class="card mt-4 shadow">
   <div class="card-header bg-primary text-white">🚨 요약</div>
   <ul class="list-group list-group-flush">
-    {% for element in summarize_result.split("\n") %}
-    <li class="list-group-item">{{ element.strip() }}</li>
+    {% for element in summerize_result.split("\n") %}
+    <li class="list-group-item">{{element.strip()}}</li>
     {% endfor %}
   </ul>
 </div>
